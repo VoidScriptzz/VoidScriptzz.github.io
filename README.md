@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unlock Dupe</title>
 
 <style>
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(180deg,#0b1220,#050814);
   font-family: Arial, sans-serif;
   display: flex;
@@ -24,8 +24,6 @@ body {
   border-radius: 16px;
   padding: 22px;
   box-shadow: 0 20px 40px rgba(0,0,0,.6);
-  display: flex;
-  flex-direction: column;
 }
 
 .title {
@@ -40,10 +38,6 @@ body {
   font-size: 14px;
   opacity: .85;
   margin: 8px 0 18px;
-}
-
-.tasks-container {
-  flex-grow: 1;
 }
 
 .task {
@@ -63,7 +57,6 @@ body {
 .like { background:#22c55e; }
 .comment { background:#ec4899; }
 .watch { background:#ef4444; }
-.trade { background:#d97706; }
 
 .progress {
   background: #1e293b;
@@ -86,195 +79,148 @@ body {
   margin-top: 6px;
 }
 
-.scripts {
+.toggle {
+  margin-top: 16px;
+  background:#6366f1;
+}
+
+.scripts, .dev-panel {
   display: none;
-  margin-top: 10px;
-  max-height: 350px;
-  overflow-y: auto;
+  margin-top: 20px;
 }
 
 .script-box {
   background: #0b1220;
   border-radius: 12px;
-  padding: 14px;
+  padding: 12px;
   margin-bottom: 12px;
-  display: flex;
-  flex-direction: column;
 }
 
 .script-title {
   font-weight: bold;
-  margin-bottom: 8px;
-  color: #4fd1ff;
+  margin-bottom: 6px;
 }
 
-.script-preview {
-  background: #1e293b;
-  border-radius: 8px;
-  padding: 10px;
+textarea {
+  width: 100%;
+  height: 70px;
+  background:#020617;
+  color:#38bdf8;
+  border:none;
+  border-radius:8px;
+  padding:8px;
+  resize:none;
   font-family: monospace;
-  font-size: 13px;
-  color: #cbd5e1;
-  white-space: pre-wrap;
-  word-break: break-word;
-  user-select: text;
-  margin-bottom: 8px;
-  height: 80px;
-  overflow-y: auto;
-  resize: vertical;
-  border: 1px solid #334155;
+  font-size: 12px;
 }
 
 .copy {
-  align-self: flex-start;
+  width: 100%;
   border: none;
-  padding: 8px 14px;
+  padding: 10px;
   border-radius: 8px;
   background: #4fd1ff;
   color: #000;
   font-weight: bold;
   cursor: pointer;
-  user-select: none;
-  transition: background 0.3s;
+  margin-top: 6px;
 }
 
-.copy:hover {
-  background: #38bdf8;
+.dev-btn {
+  background:#0ea5e9;
+  margin-top: 12px;
 }
 
-/* Bottom buttons */
-.bottom-button {
-  margin-top: 20px;
-  background: #ff5722;
-  padding: 12px;
-  font-weight: bold;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 16px;
-  user-select: none;
-  transition: background 0.3s;
+.dev-panel-header {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  margin-bottom: 10px;
 }
 
-.bottom-button:hover {
-  background: #e64a19;
+.dev-close {
+  cursor:pointer;
+  font-size:18px;
+  color:#f87171;
 }
 
-/* Dev feature button with close x */
-.dev-button {
-  margin-top: 10px;
-  background: #4a90e2;
-  padding: 10px 12px;
-  font-weight: bold;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 14px;
-  user-select: none;
-  transition: background 0.3s;
-  display: inline-flex;
-  align-items: center;
+.footer {
+  margin-top: 40px;
+  text-align:center;
+  font-size:13px;
+  opacity:.6;
 }
-
-.dev-button:hover {
-  background: #357abd;
-}
-
-#closeDevX {
-  margin-left: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 1;
-  user-select: none;
-}
-
-/* Dev UI close button */
-#devUIControls {
-  display: none; /* hidden by default */
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 10px;
-}
-
-#closeDevUIBtn {
-  background: transparent;
-  border: none;
-  color: #4fd1ff;
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-  padding: 0 6px;
-}
-#closeDevUIBtn:hover {
-  color: #38bdf8;
+.footer a {
+  color:#38bdf8;
+  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div class="card">
+  <div class="title" id="pageTitle">🔑 Steal A Brainrot Dupe</div>
+  <div class="subtitle">Complete all steps to unlock</div>
 
-  <div class="title" id="title">🔑 Unlock Dupe</div>
-  <div class="subtitle" id="subtitle">Complete all steps to unlock</div>
-
-  <div class="tasks-container" id="tasks">
-
-    <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
-    <button class="task youtube" onclick="step(this,'https://youtube.com/@xxxvoid_scriptzxxx?si=SCGX78XJf16UEyoq')">🔔 Subscribe YouTube</button>
-    <button class="task like" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">👍 Like Video</button>
-    <button class="task comment" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">💬 Comment on Video</button>
-    <button class="task watch" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">▶️ Watch Video</button>
-
-  </div>
-
-  <button class="dev-button" id="showAllBtn" onclick="showAllScripts()">
-    Show All Scripts (Dev Feature) <span id="closeDevX">×</span>
-  </button>
-
-  <div id="devUIControls">
-    <button id="closeDevUIBtn" title="Close Dev UI">×</button>
-  </div>
+  <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
+  <button class="task youtube ytTask" onclick="step(this,currentYT)">🔔 YouTube Task</button>
+  <button class="task like ytTask" onclick="step(this,currentYT)">👍 Like Video</button>
+  <button class="task comment ytTask" onclick="step(this,currentYT)">💬 Comment</button>
+  <button class="task watch ytTask" onclick="step(this,currentYT)">▶️ Watch</button>
 
   <div class="progress">
     <div class="bar" id="bar"></div>
   </div>
   <div class="percent" id="percent">0%</div>
 
+  <button class="task toggle" onclick="togglePage()" id="toggleBtn">
+    Blox Fruits Trade Scam
+  </button>
+
+  <button class="task dev-btn" onclick="openDev()">Show All Scripts (Dev)</button>
+
   <!-- Scripts -->
   <div class="scripts" id="scripts">
-
     <div class="script-box">
-      <div class="script-title">Script 1</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
+      <div class="script-title">Unlocked Script</div>
+      <textarea readonly id="mainScript"></textarea>
+      <button class="copy" onclick="copy(mainScript.value)">Copy</button>
     </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 2</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 3</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-
   </div>
 
-  <button class="bottom-button" id="tradeScamBtn" onclick="toggleTradeScam()">Blox Fruits Trade Scam</button>
+  <!-- Dev Panel -->
+  <div class="dev-panel" id="devPanel">
+    <div class="dev-panel-header">
+      <div>Dev Scripts</div>
+      <div class="dev-close" onclick="closeDev()">×</div>
+    </div>
 
+    <div class="script-box">
+      <textarea readonly id="devScript"></textarea>
+      <button class="copy" onclick="copy(devScript.value)">Copy</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Credits<br>
+    <a href="https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92n1l9qfQty" target="_blank">TikTok</a> ·
+    <a href="https://youtube.com/@xxxvoid_scriptzxxx?si=SU6hy3s1ZeSM5dO-" target="_blank">YouTube</a>
+  </div>
 </div>
 
 <script>
 let done = 0;
 const total = 5;
-let onTradeScamPage = false;
+let tradePage = false;
+
+const brainrotScript = `loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/fRNF9vgOh5toji9n/raw", true))()`;
+const tradeScript = `loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/tdmn5CXvSCxTbnip/raw", true))()`;
+
+const brainrotYT = "https://youtu.be/Oc9vLLmABqs";
+const tradeYT = "https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M";
+
+let currentYT = brainrotYT;
 
 function step(btn, link) {
   if (btn.dataset.done) return;
@@ -287,156 +233,57 @@ function step(btn, link) {
 
 function update() {
   let percent = Math.floor((done / total) * 100);
-  document.getElementById("bar").style.width = percent + "%";
-  document.getElementById("percent").innerText = percent + "%";
-
-  if (percent === 100) {
-    document.getElementById("scripts").style.display = "block";
-    document.getElementById("devUIControls").style.display = "flex"; // Show close button for dev UI
-  }
+  bar.style.width = percent + "%";
+  percentEl = document.getElementById("percent");
+  percentEl.innerText = percent + "%";
+  if (percent === 100) scripts.style.display = "block";
 }
 
-function copyText(textarea) {
-  textarea.select();
-  textarea.setSelectionRange(0, 99999); /* For mobile devices */
-  navigator.clipboard.writeText(textarea.value)
-    .then(() => alert("Copied!"))
-    .catch(() => alert("Failed to copy!"));
+function togglePage() {
+  tradePage = !tradePage;
+  resetProgress();
+  if (tradePage) {
+    pageTitle.innerText = "🔑 Blox Fruits Trade Scam";
+    toggleBtn.innerText = "⬅ Go Back";
+    mainScript.value = tradeScript;
+    devScript.value = tradeScript;
+    currentYT = tradeYT;
+  } else {
+    pageTitle.innerText = "🔑 Steal A Brainrot Dupe";
+    toggleBtn.innerText = "Blox Fruits Trade Scam";
+    mainScript.value = brainrotScript;
+    devScript.value = brainrotScript;
+    currentYT = brainrotYT;
+  }
 }
 
 function resetProgress() {
   done = 0;
-  document.getElementById("bar").style.width = "0%";
-  document.getElementById("percent").innerText = "0%";
-  document.getElementById("scripts").style.display = "none";
-  document.getElementById("devUIControls").style.display = "none";
+  bar.style.width = "0%";
+  percent.innerText = "0%";
+  scripts.style.display = "none";
+  document.querySelectorAll(".task").forEach(b => {
+    delete b.dataset.done;
+    b.style.opacity = 1;
+  });
 }
 
-function showTradeScam() {
-  document.getElementById("title").innerText = "⚠️ Blox Fruits Trade Scam";
-  document.getElementById("subtitle").innerText = "Complete all steps to unlock";
-
-  document.getElementById("tasks").innerHTML = `
-    <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
-    <button class="task youtube" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">🔔 Subscribe YouTube</button>
-    <button class="task like" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">👍 Like Video</button>
-    <button class="task comment" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">💬 Comment on Video</button>
-    <button class="task watch" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">▶️ Watch Video</button>
-  `;
-
-  document.getElementById("scripts").innerHTML = `
-    <div class="script-box">
-      <div class="script-title">Trade Scam Script</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/yjYMVmWu8WkquVbg/raw", true))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-  `;
-
-  document.getElementById("showAllBtn").style.display = "none";
-
-  resetProgress();
+function openDev() {
+  const code = prompt("Enter Dev Code");
+  if (code === "NinjaBlender223") devPanel.style.display = "block";
 }
 
-function showOriginal() {
-  document.getElementById("title").innerText = "🔑 Unlock Dupe";
-  document.getElementById("subtitle").innerText = "Complete all steps to unlock";
-
-  document.getElementById("tasks").innerHTML = `
-    <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
-    <button class="task youtube" onclick="step(this,'https://youtube.com/@xxxvoid_scriptzxxx?si=SCGX78XJf16UEyoq')">🔔 Subscribe YouTube</button>
-    <button class="task like" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">👍 Like Video</button>
-    <button class="task comment" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">💬 Comment on Video</button>
-    <button class="task watch" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">▶️ Watch Video</button>
-  `;
-
-  document.getElementById("scripts").innerHTML = `
-    <div class="script-box">
-      <div class="script-title">Script 1</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 2</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Script 3</div>
-      <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-      <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-    </div>
-  `;
-
-  document.getElementById("showAllBtn").style.display = "inline-flex";
-  document.getElementById("devUIControls").style.display = "none";
-
-  resetProgress();
+function closeDev() {
+  devPanel.style.display = "none";
 }
 
-function toggleTradeScam() {
-  if (!onTradeScamPage) {
-    showTradeScam();
-    document.getElementById("tradeScamBtn").innerText = "Steal A Brainrot Dupe";
-    document.getElementById("showAllBtn").style.display = "none";
-    document.getElementById("devUIControls").style.display = "none";
-    onTradeScamPage = true;
-  } else {
-    showOriginal();
-    document.getElementById("tradeScamBtn").innerText = "Blox Fruits Trade Scam";
-    document.getElementById("showAllBtn").style.display = "inline-flex";
-    onTradeScamPage = false;
-  }
+function copy(text) {
+  navigator.clipboard.writeText(text);
+  alert("Copied!");
 }
 
-function showAllScripts() {
-  const code = prompt("Enter dev code to show all scripts:");
-  if (code === "NinjaBlender223") {
-    document.getElementById("scripts").style.display = "block";
-    document.getElementById("devUIControls").style.display = "flex";
-    document.getElementById("scripts").innerHTML = `
-      <div class="script-box">
-        <div class="script-title">Script 1</div>
-        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-      </div>
-
-      <div class="script-box">
-        <div class="script-title">Script 2</div>
-        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-      </div>
-
-      <div class="script-box">
-        <div class="script-title">Script 3</div>
-        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-      </div>
-
-      <div class="script-box">
-        <div class="script-title">Trade Scam Script</div>
-        <textarea class="script-preview" readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/yjYMVmWu8WkquVbg/raw", true))()</textarea>
-        <button class="copy" onclick="copyText(this.previousElementSibling)">Copy</button>
-      </div>
-    `;
-  } else {
-    alert("Incorrect code.");
-  }
-}
-
-// Close "×" button on dev feature button
-document.getElementById("closeDevX").addEventListener("click", function(event) {
-  event.stopPropagation(); // Prevent running showAllScripts
-  document.getElementById("showAllBtn").style.display = "none";
-});
-
-// Close button for entire dev UI (scripts + dev button)
-document.getElementById("closeDevUIBtn").addEventListener("click", () => {
-  document.getElementById("scripts").style.display = "none";
-  document.getElementById("showAllBtn").style.display = "none";
-  document.getElementById("devUIControls").style.display = "none";
-});
+mainScript.value = brainrotScript;
+devScript.value = brainrotScript;
 </script>
 
 </body>
