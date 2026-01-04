@@ -19,7 +19,7 @@ body {
 
 .card {
   width: 90%;
-  max-width: 380px;
+  max-width: 400px;
   background: #111a2e;
   border-radius: 16px;
   padding: 22px;
@@ -57,6 +57,8 @@ body {
 .like { background:#22c55e; }
 .comment { background:#ec4899; }
 .watch { background:#ef4444; }
+.toggle { background:#6366f1; margin-top:10px; }
+.dev-btn { background:#0ea5e9; margin-top:10px; }
 
 .progress {
   background: #1e293b;
@@ -77,11 +79,6 @@ body {
   text-align: center;
   font-size: 13px;
   margin-top: 6px;
-}
-
-.toggle {
-  margin-top: 16px;
-  background:#6366f1;
 }
 
 .scripts, .dev-panel {
@@ -126,11 +123,6 @@ textarea {
   margin-top: 6px;
 }
 
-.dev-btn {
-  background:#0ea5e9;
-  margin-top: 12px;
-}
-
 .dev-panel-header {
   display:flex;
   justify-content: space-between;
@@ -143,31 +135,20 @@ textarea {
   font-size:18px;
   color:#f87171;
 }
-
-.footer {
-  margin-top: 40px;
-  text-align:center;
-  font-size:13px;
-  opacity:.6;
-}
-.footer a {
-  color:#38bdf8;
-  text-decoration:none;
-}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-  <div class="title" id="pageTitle">🔑 Steal A Brainrot Dupe</div>
+  <div class="title">🔑 Steal A Brainrot Dupe</div>
   <div class="subtitle">Complete all steps to unlock</div>
 
   <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
-  <button class="task youtube ytTask" onclick="step(this,currentYT)">🔔 YouTube Task</button>
-  <button class="task like ytTask" onclick="step(this,currentYT)">👍 Like Video</button>
-  <button class="task comment ytTask" onclick="step(this,currentYT)">💬 Comment</button>
-  <button class="task watch ytTask" onclick="step(this,currentYT)">▶️ Watch</button>
+  <button class="task youtube" onclick="step(this,ytLink)">🔔 Subscribe</button>
+  <button class="task like" onclick="step(this,ytLink)">👍 Like</button>
+  <button class="task comment" onclick="step(this,ytLink)">💬 Comment</button>
+  <button class="task watch" onclick="step(this,ytLink)">▶️ Watch</button>
 
   <div class="progress">
     <div class="bar" id="bar"></div>
@@ -180,16 +161,28 @@ textarea {
 
   <button class="task dev-btn" onclick="openDev()">Show All Scripts (Dev)</button>
 
-  <!-- Scripts -->
+  <!-- UNLOCKED DUPE SCRIPTS -->
   <div class="scripts" id="scripts">
     <div class="script-box">
-      <div class="script-title">Unlocked Script</div>
-      <textarea readonly id="mainScript"></textarea>
-      <button class="copy" onclick="copy(mainScript.value)">Copy</button>
+      <div class="script-title">Dupe Script 1</div>
+      <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Dupe Script 2</div>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Dupe Script 3</div>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
     </div>
   </div>
 
-  <!-- Dev Panel -->
+  <!-- DEV PANEL (ALL 4 SCRIPTS) -->
   <div class="dev-panel" id="devPanel">
     <div class="dev-panel-header">
       <div>Dev Scripts</div>
@@ -197,30 +190,35 @@ textarea {
     </div>
 
     <div class="script-box">
-      <textarea readonly id="devScript"></textarea>
-      <button class="copy" onclick="copy(devScript.value)">Copy</button>
+      <div class="script-title">Dupe Script 1</div>
+      <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
     </div>
-  </div>
 
-  <div class="footer">
-    Credits<br>
-    <a href="https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92n1l9qfQty" target="_blank">TikTok</a> ·
-    <a href="https://youtube.com/@xxxvoid_scriptzxxx?si=SU6hy3s1ZeSM5dO-" target="_blank">YouTube</a>
+    <div class="script-box">
+      <div class="script-title">Dupe Script 2</div>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Dupe Script 3</div>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+    </div>
+
+    <div class="script-box">
+      <div class="script-title">Blox Fruits Trade Scam</div>
+      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/tdmn5CXvSCxTbnip/raw", true))()</textarea>
+      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+    </div>
   </div>
 </div>
 
 <script>
 let done = 0;
 const total = 5;
-let tradePage = false;
-
-const brainrotScript = `loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/fRNF9vgOh5toji9n/raw", true))()`;
-const tradeScript = `loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/tdmn5CXvSCxTbnip/raw", true))()`;
-
-const brainrotYT = "https://youtu.be/Oc9vLLmABqs";
-const tradeYT = "https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M";
-
-let currentYT = brainrotYT;
+let ytLink = "https://youtu.be/Oc9vLLmABqs";
 
 function step(btn, link) {
   if (btn.dataset.done) return;
@@ -234,33 +232,19 @@ function step(btn, link) {
 function update() {
   let percent = Math.floor((done / total) * 100);
   bar.style.width = percent + "%";
-  percentEl = document.getElementById("percent");
   percentEl.innerText = percent + "%";
   if (percent === 100) scripts.style.display = "block";
 }
 
 function togglePage() {
-  tradePage = !tradePage;
   resetProgress();
-  if (tradePage) {
-    pageTitle.innerText = "🔑 Blox Fruits Trade Scam";
-    toggleBtn.innerText = "⬅ Go Back";
-    mainScript.value = tradeScript;
-    devScript.value = tradeScript;
-    currentYT = tradeYT;
-  } else {
-    pageTitle.innerText = "🔑 Steal A Brainrot Dupe";
-    toggleBtn.innerText = "Blox Fruits Trade Scam";
-    mainScript.value = brainrotScript;
-    devScript.value = brainrotScript;
-    currentYT = brainrotYT;
-  }
+  ytLink = "https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M";
 }
 
 function resetProgress() {
   done = 0;
   bar.style.width = "0%";
-  percent.innerText = "0%";
+  percentEl.innerText = "0%";
   scripts.style.display = "none";
   document.querySelectorAll(".task").forEach(b => {
     delete b.dataset.done;
@@ -281,9 +265,6 @@ function copy(text) {
   navigator.clipboard.writeText(text);
   alert("Copied!");
 }
-
-mainScript.value = brainrotScript;
-devScript.value = brainrotScript;
 </script>
 
 </body>
