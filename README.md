@@ -88,7 +88,7 @@ body {
 
 .scripts {
   display: none;
-  margin-top: 20px;
+  margin-top: 10px;
   max-height: 350px;
   overflow-y: auto;
 }
@@ -161,11 +161,11 @@ body {
   background: #e64a19;
 }
 
-/* Smaller button for dev feature */
+/* Dev feature button with close x */
 .dev-button {
   margin-top: 10px;
   background: #4a90e2;
-  padding: 10px;
+  padding: 10px 12px;
   font-weight: bold;
   border-radius: 12px;
   border: none;
@@ -174,10 +174,42 @@ body {
   font-size: 14px;
   user-select: none;
   transition: background 0.3s;
+  display: inline-flex;
+  align-items: center;
 }
 
 .dev-button:hover {
   background: #357abd;
+}
+
+#closeDevX {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Dev UI close button */
+#devUIControls {
+  display: none; /* hidden by default */
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#closeDevUIBtn {
+  background: transparent;
+  border: none;
+  color: #4fd1ff;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 6px;
+}
+#closeDevUIBtn:hover {
+  color: #38bdf8;
 }
 </style>
 </head>
@@ -199,7 +231,13 @@ body {
 
   </div>
 
-  <button class="dev-button" id="showAllBtn" onclick="showAllScripts()">Show All Scripts (Dev Feature)</button>
+  <button class="dev-button" id="showAllBtn" onclick="showAllScripts()">
+    Show All Scripts (Dev Feature) <span id="closeDevX">×</span>
+  </button>
+
+  <div id="devUIControls">
+    <button id="closeDevUIBtn" title="Close Dev UI">×</button>
+  </div>
 
   <div class="progress">
     <div class="bar" id="bar"></div>
@@ -229,13 +267,14 @@ body {
 
   </div>
 
-  <button class="bottom-button" id="tradeScamBtn" onclick="showTradeScam()">Blox Fruits Trade Scam</button>
+  <button class="bottom-button" id="tradeScamBtn" onclick="toggleTradeScam()">Blox Fruits Trade Scam</button>
 
 </div>
 
 <script>
 let done = 0;
 const total = 5;
+let onTradeScamPage = false;
 
 function step(btn, link) {
   if (btn.dataset.done) return;
@@ -253,6 +292,7 @@ function update() {
 
   if (percent === 100) {
     document.getElementById("scripts").style.display = "block";
+    document.getElementById("devUIControls").style.display = "flex"; // Show close button for dev UI
   }
 }
 
@@ -269,14 +309,13 @@ function resetProgress() {
   document.getElementById("bar").style.width = "0%";
   document.getElementById("percent").innerText = "0%";
   document.getElementById("scripts").style.display = "none";
+  document.getElementById("devUIControls").style.display = "none";
 }
 
 function showTradeScam() {
-  // Change title and subtitle
   document.getElementById("title").innerText = "⚠️ Blox Fruits Trade Scam";
   document.getElementById("subtitle").innerText = "Complete all steps to unlock";
 
-  // Replace tasks
   document.getElementById("tasks").innerHTML = `
     <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
     <button class="task youtube" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">🔔 Subscribe YouTube</button>
@@ -285,7 +324,6 @@ function showTradeScam() {
     <button class="task watch" onclick="step(this,'https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M')">▶️ Watch Video</button>
   `;
 
-  // Replace scripts area with the new single trade scam script with preview and copy
   document.getElementById("scripts").innerHTML = `
     <div class="script-box">
       <div class="script-title">Trade Scam Script</div>
@@ -294,18 +332,15 @@ function showTradeScam() {
     </div>
   `;
 
-  // Hide Dev Feature button on trade scam page
   document.getElementById("showAllBtn").style.display = "none";
 
   resetProgress();
 }
 
 function showOriginal() {
-  // Reset title and subtitle
   document.getElementById("title").innerText = "🔑 Unlock Dupe";
   document.getElementById("subtitle").innerText = "Complete all steps to unlock";
 
-  // Restore original tasks
   document.getElementById("tasks").innerHTML = `
     <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
     <button class="task youtube" onclick="step(this,'https://youtube.com/@xxxvoid_scriptzxxx?si=SCGX78XJf16UEyoq')">🔔 Subscribe YouTube</button>
@@ -314,7 +349,6 @@ function showOriginal() {
     <button class="task watch" onclick="step(this,'https://youtu.be/Oc9vLLmABqs?si=_Ugl81A4zS3jDuSH')">▶️ Watch Video</button>
   `;
 
-  // Restore original scripts with previews and copy buttons
   document.getElementById("scripts").innerHTML = `
     <div class="script-box">
       <div class="script-title">Script 1</div>
@@ -335,18 +369,32 @@ function showOriginal() {
     </div>
   `;
 
-  // Show Dev Feature button on original page
-  document.getElementById("showAllBtn").style.display = "block";
+  document.getElementById("showAllBtn").style.display = "inline-flex";
+  document.getElementById("devUIControls").style.display = "none";
 
   resetProgress();
 }
 
-// Show all scripts when dev feature button clicked
+function toggleTradeScam() {
+  if (!onTradeScamPage) {
+    showTradeScam();
+    document.getElementById("tradeScamBtn").innerText = "Steal A Brainrot Dupe";
+    document.getElementById("showAllBtn").style.display = "none";
+    document.getElementById("devUIControls").style.display = "none";
+    onTradeScamPage = true;
+  } else {
+    showOriginal();
+    document.getElementById("tradeScamBtn").innerText = "Blox Fruits Trade Scam";
+    document.getElementById("showAllBtn").style.display = "inline-flex";
+    onTradeScamPage = false;
+  }
+}
+
 function showAllScripts() {
   const code = prompt("Enter dev code to show all scripts:");
   if (code === "NinjaBlender223") {
-    // Show all scripts combined in scripts area
     document.getElementById("scripts").style.display = "block";
+    document.getElementById("devUIControls").style.display = "flex";
     document.getElementById("scripts").innerHTML = `
       <div class="script-box">
         <div class="script-title">Script 1</div>
@@ -377,6 +425,18 @@ function showAllScripts() {
   }
 }
 
+// Close "×" button on dev feature button
+document.getElementById("closeDevX").addEventListener("click", function(event) {
+  event.stopPropagation(); // Prevent running showAllScripts
+  document.getElementById("showAllBtn").style.display = "none";
+});
+
+// Close button for entire dev UI (scripts + dev button)
+document.getElementById("closeDevUIBtn").addEventListener("click", () => {
+  document.getElementById("scripts").style.display = "none";
+  document.getElementById("showAllBtn").style.display = "none";
+  document.getElementById("devUIControls").style.display = "none";
+});
 </script>
 
 </body>
