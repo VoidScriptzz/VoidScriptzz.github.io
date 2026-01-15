@@ -34,10 +34,18 @@
     user-select: none;
   }
 
-  .dev-key {
+  .dev-key, .dev-apple {
     cursor: pointer;
     margin-right: 8px;
-    color: #facc15; /* bright yellow for visibility */
+    user-select: none;
+  }
+
+  .dev-key {
+    color: #facc15; /* yellow */
+  }
+
+  .dev-apple {
+    color: #34d399; /* greenish */
   }
 
   .subtitle {
@@ -157,6 +165,7 @@
     margin-top: 10px;
     user-select: none;
   }
+
 </style>
 </head>
 
@@ -193,23 +202,33 @@
     </div>
   </div>
 
-  <button class="task switch" onclick="switchPage()">Blox Fruits Trade Scam</button>
+  <button class="task switch" onclick="switchPage()">🍎 Blox Fruits Trade Scam</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="card" id="page2" style="display:none">
   <div class="title">
-    <span class="dev-key" onclick="openDev()">🔑</span>🍎 Blox Fruits Trade Scam
+    <span class="dev-apple" onclick="openDev()">🍎</span> Blox Fruits Trade Scam
   </div>
+  <div class="subtitle">Complete all steps to unlock</div>
 
-  <div class="scripts" id="bloxScripts" style="display:none;">
+  <button class="task tiktok" onclick="step2(this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
+  <button class="task youtube" onclick="step2(this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe YouTube</button>
+  <button class="task like" onclick="step2(this,'https://youtube.com/shorts/ycfxxkTQmTU')">👍 Like</button>
+  <button class="task comment" onclick="step2(this,'https://youtube.com/shorts/ycfxxkTQmTU')">💬 Comment</button>
+  <button class="task watch" onclick="step2(this,'https://youtube.com/shorts/ycfxxkTQmTU')">▶️ Watch</button>
+
+  <div class="progress"><div class="bar" id="bar2"></div></div>
+  <div class="percent" id="percent2">0%</div>
+
+  <div class="scripts" id="bloxScripts">
     <div class="script-box">
       <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
       <button class="copy" onclick="copyScript(this)">Copy</button>
     </div>
   </div>
 
-  <button class="task switch" onclick="switchPage()">Steal A Brainrot Dupe</button>
+  <button class="task switch" onclick="switchPage()">🔑 Steal A Brainrot Dupe</button>
 </div>
 
 <!-- DEV PANEL -->
@@ -225,27 +244,50 @@
   <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/xU2oTZng4Oga2rmU/raw", true))()</textarea>
 </div>
 
-<div class="footer">Last updated: September 2026<br>
+<div class="footer">Last updated: January 2026<br>
 Credits: <a href="https://github.com/" target="_blank" style="color:#94a3b8;">GitHub</a> | <a href="https://www.tiktok.com/@void_scriptz" target="_blank" style="color:#94a3b8;">TikTok</a> | <a href="https://youtube.com/@xxxvoid_scriptzxxx" target="_blank" style="color:#94a3b8;">YouTube</a></div>
 
 <script>
-  let done = 0, total = 5;
+  const total = 5;
+
+  // Page 1 progress state
+  let done1 = 0;
+  // Page 2 progress state
+  let done2 = 0;
 
   function step(btn, link){
     if(btn.dataset.done) return;
     btn.dataset.done = true;
     btn.style.opacity = .6;
-    done++;
-    const percent = Math.floor((done / total) * 100);
-    document.getElementById("bar").style.width = percent + "%";
-    document.getElementById("percent").innerText = percent + "%";
-
-    if(done === total){
-      document.getElementById("dupes").style.display = "block";
-      document.getElementById("bloxScripts").style.display = "block";
-    }
-
+    done1++;
+    updateProgress(1, done1);
     window.open(link, "_blank");
+  }
+
+  function step2(btn, link){
+    if(btn.dataset.done) return;
+    btn.dataset.done = true;
+    btn.style.opacity = .6;
+    done2++;
+    updateProgress(2, done2);
+    window.open(link, "_blank");
+  }
+
+  function updateProgress(page, done){
+    let percent = Math.floor((done / total) * 100);
+    if(page === 1){
+      document.getElementById("bar").style.width = percent + "%";
+      document.getElementById("percent").innerText = percent + "%";
+      if(percent === 100){
+        document.getElementById("dupes").style.display = "block";
+      }
+    } else {
+      document.getElementById("bar2").style.width = percent + "%";
+      document.getElementById("percent2").innerText = percent + "%";
+      if(percent === 100){
+        document.getElementById("bloxScripts").style.display = "block";
+      }
+    }
   }
 
   function copyScript(btn){
@@ -256,18 +298,25 @@ Credits: <a href="https://github.com/" target="_blank" style="color:#94a3b8;">Gi
   }
 
   function switchPage(){
-    page1.style.display = page1.style.display === "none" ? "block" : "none";
-    page2.style.display = page2.style.display === "none" ? "block" : "none";
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    if(page1.style.display === "none"){
+      page1.style.display = "block";
+      page2.style.display = "none";
+    } else {
+      page1.style.display = "none";
+      page2.style.display = "block";
+    }
   }
 
   function openDev(){
+    const dev = document.getElementById("dev");
     const pass = prompt("Enter Dev Code");
     if(pass === "NinjaBlender223"){
-      done = total;
-      document.getElementById("bar").style.width = "100%";
-      document.getElementById("percent").innerText = "100%";
-      document.getElementById("dupes").style.display = "block";
-      document.getElementById("bloxScripts").style.display = "block";
+      done1 = total;
+      done2 = total;
+      updateProgress(1, done1);
+      updateProgress(2, done2);
       dev.style.display = "block";
     }
   }
