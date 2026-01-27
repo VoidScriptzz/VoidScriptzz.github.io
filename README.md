@@ -2,173 +2,206 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unlock Scripts</title>
-
+<title>Void Script Hub</title>
 <style>
-body{margin:0;min-height:100vh;background:linear-gradient(180deg,#0b1220,#050814);
-font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff}
-.card{width:90%;max-width:430px;background:#111a2e;border-radius:16px;padding:22px;
-box-shadow:0 20px 40px rgba(0,0,0,.6);margin-bottom:16px}
-.title{text-align:center;font-size:24px;font-weight:bold;color:#4fd1ff}
-.dev-btn{cursor:pointer}
-.subtitle{text-align:center;font-size:14px;opacity:.85;margin:8px 0 18px}
-.task{width:100%;border:none;padding:14px;margin:7px 0;border-radius:10px;
-font-size:15px;font-weight:bold;cursor:pointer;color:#fff}
-.watch{background:#ef4444}.like{background:#22c55e}.youtube{background:#f59e0b}
-.comment{background:#ec4899}.tiktok{background:#3b82f6}.switch{background:#64748b}
-
-.progress{background:#1e293b;border-radius:10px;height:12px;margin-top:16px;overflow:hidden}
-.bar{height:100%;width:0%;background:linear-gradient(90deg,#4fd1ff,#38bdf8);transition:.3s}
-.percent{text-align:center;font-size:13px;margin-top:6px}
-.scripts{display:none;margin-top:20px}
-.script-box{background:#0b1220;border-radius:12px;padding:14px;margin-bottom:12px}
-textarea{width:100%;height:90px;background:#020617;color:#4fd1ff;border:none;
-border-radius:8px;padding:10px;resize:none;font-size:12px}
-.copy{width:100%;border:none;padding:10px;border-radius:8px;background:#4fd1ff;
-color:#000;font-weight:bold;cursor:pointer;margin-top:8px}
-
-.dev-panel{display:none;position:fixed;bottom:10px;left:50%;transform:translateX(-50%);
-width:90%;max-width:430px;background:#020617;border-radius:14px;padding:14px;z-index:999}
-.dev-header{display:flex;justify-content:space-between;font-weight:bold;margin-bottom:10px}
-.close{cursor:pointer;color:#f87171}
-.footer{font-size:11px;color:#94a3b8;margin:12px 0}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+.container {
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+.section {
+    display: none;
+}
+.section.active {
+    display: block;
+}
+.task {
+    background: #1f1f1f;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+button {
+    background: #2a2a2a;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+button:hover {
+    background: #3a3a3a;
+}
+textarea {
+    width: 100%;
+    height: 80px;
+    background: #111;
+    color: #0f0;
+    border-radius: 6px;
+    padding: 10px;
+    resize: none;
+}
+.progress {
+    width: 100%;
+    height: 12px;
+    background: #333;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.bar {
+    height: 100%;
+    width: 0%;
+    background: #00ff88;
+}
+.nav {
+    margin-top: 20px;
+}
+.small {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin-top: 40px;
+}
+.dev-panel {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.9);
+    display: none;
+    padding: 20px;
+}
+.dev-box {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+}
+.close {
+    float: right;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
-<!-- STEAL A BRAINROT -->
-<div class="card" id="brainrotPage">
-<div class="title"><span class="dev-btn" onclick="openDev('brainrot')">🔑</span> Steal A Brainrot Dupe</div>
-<div class="subtitle">Complete all steps to unlock</div>
+<div class="container">
 
-<button class="task watch" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">▶ Watch</button>
-<button class="task like" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">👍 Like</button>
-<button class="task youtube" onclick="step('brainrot',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
-<button class="task comment" onclick="step('brainrot',this,'https://youtu.be/Oc9vLLmABqs')">💬 Comment</button>
-<button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow</button>
+<h1>🧠 Steal A Brainrot Dupe 🔑</h1>
 
-<div class="progress"><div class="bar" id="barBrainrot"></div></div>
-<div class="percent" id="percentBrainrot">0%</div>
+<div id="brainrot" class="section active">
+    <div class="task">📺 Watch: <a href="https://youtube.com/shorts/p8Tr6844hVg" target="_blank">Video</a></div>
+    <div class="task">👍 Like same video</div>
+    <div class="task">💬 Comment: <a href="https://youtu.be/Oc9vLLmABqs" target="_blank">Here</a></div>
+    <div class="task">🔔 Subscribe: <a href="https://youtube.com/@xxxvoid_scriptzxxx" target="_blank">YouTube</a></div>
+    <div class="task">📱 Follow: <a href="https://www.tiktok.com/@void_scriptz" target="_blank">TikTok</a></div>
 
-<div class="scripts" id="brainrotScripts">
-<div class="script-box">
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/L4cByz8CzcDky1CE/raw", true))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
-<div class="script-box">
-<textarea readonly>loadstring(game:HttpGet("https://pastefy.app/hSlinB5f/raw"))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
-</div>
+    <div class="progress"><div id="bar1" class="bar"></div></div>
 
-<button class="task switch" onclick="switchPage()">🍎 Blox Fruits Trade Scam</button>
-</div>
+    <div id="brainrotScripts" style="display:none">
+        <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/L4cByz8CzcDky1CE/raw", true))()</textarea>
+        <button onclick="copyWarn(this)">Copy</button>
 
-<!-- BLOX FRUITS -->
-<div class="card" id="bloxPage" style="display:none">
-<div class="title"><span class="dev-btn" onclick="openDev('blox')">🍎</span> Blox Fruits Trade Scam</div>
-<div class="subtitle">Complete all steps to unlock</div>
+        <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/hSlinB5f/raw"))()</textarea>
+        <button onclick="copyWarn(this)">Copy</button>
+    </div>
 
-<button class="task watch" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">▶ Watch</button>
-<button class="task like" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">👍 Like</button>
-<button class="task youtube" onclick="step('blox',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
-<button class="task comment" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">💬 Comment</button>
-<button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow</button>
-
-<div class="progress"><div class="bar" id="barBlox"></div></div>
-<div class="percent" id="percentBlox">0%</div>
-
-<div class="scripts" id="bloxScripts">
-<div class="script-box">
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
+    <div class="nav">
+        <button onclick="show('blox')">🍎 Blox Fruits Trade Scam</button>
+        <button onclick="show('other')">⭐ Other Scripts</button>
+    </div>
 </div>
 
-<button class="task switch" onclick="showOther()">⭐ Other Scripts</button>
+<h1>🍎 Blox Fruits Trade Scam 🍎</h1>
+
+<div id="blox" class="section">
+    <div class="task">📺 Watch: <a href="https://youtube.com/shorts/ycfxxkTQmTU" target="_blank">Short</a></div>
+    <div class="task">👍 Like + 💬 Comment</div>
+    <div class="task">🔔 Subscribe</div>
+    <div class="task">📱 Follow TikTok</div>
+
+    <div class="progress"><div id="bar2" class="bar"></div></div>
+
+    <div id="bloxScript" style="display:none">
+        <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
+        <button onclick="copyWarn(this)">Copy</button>
+    </div>
+
+    <button onclick="show('brainrot')">⬅ Back</button>
 </div>
 
-<!-- OTHER SCRIPTS -->
-<div class="card" id="otherPage" style="display:none">
-<div class="title"><span class="dev-btn" onclick="openDev('other')">🔪</span> Other Scripts</div>
-<div class="subtitle">Follow TikTok & Subscribe YouTube to unlock</div>
+<h1>⭐ Other Scripts 🔪</h1>
 
-<button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
-<button class="task youtube" onclick="step('other',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe YouTube</button>
+<div id="other" class="section">
+    <div class="task">📱 Follow TikTok</div>
+    <div class="task">🔔 Subscribe YouTube</div>
 
-<div class="progress"><div class="bar" id="barOther"></div></div>
-<div class="percent" id="percentOther">0%</div>
+    <div class="progress"><div id="bar3" class="bar"></div></div>
 
-<div class="scripts" id="otherScripts">
-<div class="script-box">
-<div>💸 Pls Donate</div>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/HNucEQryY0VUXUcc/raw", true))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
-<div class="script-box">
-<div>🐶 Adopt Me</div>
-<textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Yv9IAzqi/raw"))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
-<div class="script-box">
-<div>🔪 Murder Mystery 2</div>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/zKbQRBkcnMmN9zQr/raw", true))()</textarea>
-<button class="copy" onclick="copy(this)">Copy</button>
-</div>
+    <div id="otherScripts" style="display:none">
+        <h3>💸 Pls Donate</h3>
+        <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/HNucEQryY0VUXUcc/raw", true))()</textarea>
+
+        <h3>🐶 Adopt Me</h3>
+        <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Yv9IAzqi/raw"))()</textarea>
+
+        <h3>🔪 Murder Mystery 2</h3>
+        <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/zKbQRBkcnMmN9zQr/raw", true))()</textarea>
+    </div>
+
+    <button onclick="show('brainrot')">⬅ Back</button>
 </div>
 
-<button class="task switch" onclick="backHome()">🔑 Back</button>
+<div class="small">Last updated: 2026-01-27</div>
+
 </div>
 
 <!-- DEV PANEL -->
-<div class="dev-panel" id="devPanel">
-<div class="dev-header">
-<span>DEV PANEL</span>
-<span class="close" onclick="devPanel.style.display='none'">✖</span>
-</div>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/L4cByz8CzcDky1CE/raw", true))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://pastefy.app/hSlinB5f/raw"))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/HNucEQryY0VUXUcc/raw", true))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Yv9IAzqi/raw"))()</textarea>
-<textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/zKbQRBkcnMmN9zQr/raw", true))()</textarea>
-</div>
+<div id="dev" class="dev-panel">
+    <div class="dev-box">
+        <span class="close" onclick="dev.style.display='none'">❌</span>
+        <h2>🔪 Dev Panel</h2>
+        <input id="pass" placeholder="Password">
+        <button onclick="unlockDev()">Unlock</button>
 
-<div class="footer">Last updated: January 2026</div>
+        <pre id="devScripts" style="display:none">
+BRAINROT:
+loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/L4cByz8CzcDky1CE/raw", true))()
+loadstring(game:HttpGet("https://pastefy.app/hSlinB5f/raw"))()
+
+BLOX FRUITS:
+loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()
+
+OTHER:
+Pls Donate / Adopt Me / MM2
+        </pre>
+    </div>
+</div>
 
 <script>
-const total={brainrot:5,blox:5,other:2};
-let prog={brainrot:0,blox:0,other:0};
-
-function step(page,btn,link){
-if(btn.dataset.done)return;
-btn.dataset.done=1;btn.style.opacity=.6;prog[page]++;
-let p=Math.floor(prog[page]/total[page]*100);
-document.getElementById("bar"+cap(page)).style.width=p+"%";
-document.getElementById("percent"+cap(page)).innerText=p+"%";
-if(p===100)document.getElementById(page+"Scripts").style.display="block";
-window.open(link,"_blank");
+function show(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'))
+    document.getElementById(id).classList.add('active')
 }
-function copy(btn){
-if(confirm("Use The Script In Second Sea Cafe Or It Won’t Work\n\nPress OK to confirm")){
-navigator.clipboard.writeText(btn.previousElementSibling.value);
-alert("Copied!");
+function copyWarn(btn){
+    if(confirm("Use The Script In Second Sea Cafe Or It Won’t Work.\n\nPress OK to continue")){
+        navigator.clipboard.writeText(btn.previousElementSibling.value)
+    }
 }
+function unlockDev(){
+    if(pass.value==="NinjaBlender223"){
+        devScripts.style.display="block"
+    }
 }
-function openDev(page){
-if(prompt("Enter Dev Code")!=="NinjaBlender223")return;
-prog[page]=total[page];
-document.getElementById("bar"+cap(page)).style.width="100%";
-document.getElementById("percent"+cap(page)).innerText="100%";
-document.getElementById(page+"Scripts").style.display="block";
-devPanel.style.display="block";
-}
-function switchPage(){brainrotPage.style.display="none";bloxPage.style.display="block"}
-function showOther(){bloxPage.style.display="none";otherPage.style.display="block"}
-function backHome(){otherPage.style.display="none";brainrotPage.style.display="block"}
-function cap(x){return x.charAt(0).toUpperCase()+x.slice(1)}
+document.addEventListener("keydown",e=>{
+    if(e.key==="🔪") dev.style.display="block"
+})
 </script>
 
 </body>
