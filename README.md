@@ -134,7 +134,6 @@ textarea{
   margin-top:8px;
 }
 
-/* Dev Panel */
 #devPanel{
   display:none;
   position:fixed;
@@ -217,7 +216,7 @@ textarea{
 
   <div class="scripts" id="scriptsblox">
     <div class="script-box">
-      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/YZ8jOG4OthFcWlNT/raw", true))()</textarea>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Q0wiKNh1/raw", true))()</textarea>
       <button class="copy" onclick="copy(this)">Copy</button>
     </div>
   </div>
@@ -258,12 +257,6 @@ textarea{
   <button class="task switch" onclick="go('brainrot')">⬅ Back</button>
 </div>
 
-<!-- DEV PANEL -->
-<div id="devPanel">
-  <header>DEV PANEL <span class="close" onclick="closeDev()">✖</span></header>
-  <textarea readonly>All scripts unlocked via dev</textarea>
-</div>
-
 <script>
 const total={brainrot:6,blox:6,other:3}
 const done={brainrot:0,blox:0,other:0}
@@ -301,12 +294,7 @@ function dev(p){
   if(prompt("Dev Code:")==="NinjaBlender223"){
     done[p]=total[p]
     update(p)
-    document.getElementById("devPanel").style.display="block"
   }
-}
-
-function closeDev(){
-  document.getElementById("devPanel").style.display="none"
 }
 </script>
 
