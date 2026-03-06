@@ -251,8 +251,8 @@ textarea{
 
   <div class="scripts" id="scriptsblox">
     <div class="script-box">
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Q0wiKNh1/raw", true))()</textarea>
-      <button class="copy" onclick="copy(this)">Copy</button>
+      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/KYGWf66A/raw", true))()</textarea>
+      <button class="copy" onclick="copyInstant(this)">Copy</button>
     </div>
   </div>
 
