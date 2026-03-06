@@ -108,15 +108,6 @@ body{
   letter-spacing:1px;
 }
 
-.no-ps-label{
-  font-size:12px;
-  color:#22c55e;
-  margin-bottom:6px;
-  font-weight:bold;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
 textarea{
   width:100%;
   height:85px;
@@ -136,18 +127,6 @@ textarea{
   padding:8px;
   border-radius:8px;
   background:#4fd1ff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.copy-instant{
-  margin-top:6px;
-  width:100%;
-  border:none;
-  padding:8px;
-  border-radius:8px;
-  background:#22c55e;
-  color:#fff;
   font-weight:bold;
   cursor:pointer;
 }
@@ -191,56 +170,6 @@ textarea{
 .close{
   cursor:pointer;
   color:#ef4444;
-}
-
-/* Modal Styles */
-#tutorialModal{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  z-index:1000;
-  justify-content:center;
-  align-items:center;
-}
-
-#tutorialModal .modal-content{
-  background:#111a2e;
-  padding:20px;
-  border-radius:16px;
-  max-width:90%;
-  width:400px;
-  text-align:center;
-}
-
-#tutorialModal h3{
-  color:#4fd1ff;
-  margin-top:0;
-}
-
-#tutorialModal p{
-  font-size:14px;
-  margin-bottom:15px;
-  opacity:0.9;
-}
-
-#tutorialModal .modal-btn{
-  background:#4fd1ff;
-  color:#000;
-  border:none;
-  padding:10px 20px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  margin:5px;
-}
-
-#tutorialModal .modal-btn.secondary{
-  background:#64748b;
-  color:#fff;
 }
 
 /* Update Log Styles */
@@ -288,14 +217,9 @@ textarea{
 
   <div class="scripts" id="scriptsbrainrot">
     <div class="script-box">
-      <div class="script-label">🔥 Dupe + Trade Freeze</div>
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/odvJ80lq/raw", true))()</textarea>
-      <button class="copy" onclick="copyBrainrot(this)">Copy</button>
-    </div>
-    <div class="script-box">
-      <div class="no-ps-label">🌐 Private Server Link Not Required</div>
-      <textarea readonly>loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/pgCPPFtNvmI46SWc/raw"))()</textarea>
-      <button class="copy-instant" onclick="copyInstant(this)">Copy</button>
+      <div class="script-label">⚡ Duplication/Duel/Trade Script</div>
+      <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Loader/refs/heads/main/VoidzLoader"))()</textarea>
+      <button class="copy" onclick="copyInstant(this)">Copy</button>
     </div>
   </div>
 
@@ -378,20 +302,9 @@ textarea{
   </div>
 </div>
 
-<!-- Tutorial Modal -->
-<div id="tutorialModal">
-  <div class="modal-content">
-    <h3>⚠️ Important!</h3>
-    <p>Make sure you have followed these steps before using the script!</p>
-    <button class="modal-btn" onclick="openTutorial()">📺 View Tutorial</button>
-    <button class="modal-btn secondary" onclick="closeModal()">Cancel</button>
-  </div>
-</div>
-
 <script>
 const total={brainrot:6,blox:6,other:3}
 const done={brainrot:0,blox:0,other:0}
-let pendingCopy = null;
 
 // Set update timestamps on load
 function setUpdateTimes(){
@@ -438,29 +351,9 @@ function copy(b){
   }
 }
 
-function copyBrainrot(b){
-  pendingCopy = b;
-  document.getElementById('tutorialModal').style.display = 'flex';
-}
-
 function copyInstant(b){
   navigator.clipboard.writeText(b.previousElementSibling.value);
   alert("Copied! ✅");
-}
-
-function openTutorial(){
-  window.open('https://youtube.com/shorts/cfLmf6lb5Ds', '_blank');
-  if(pendingCopy){
-    navigator.clipboard.writeText(pendingCopy.previousElementSibling.value);
-    alert("Copied! Tutorial opened in new tab.");
-    pendingCopy = null;
-  }
-  closeModal();
-}
-
-function closeModal(){
-  document.getElementById('tutorialModal').style.display = 'none';
-  pendingCopy = null;
 }
 
 function go(p){
