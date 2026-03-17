@@ -218,7 +218,7 @@ textarea{
   <div class="scripts" id="scriptsbrainrot">
     <div class="script-box">
       <div class="script-label">⚡ Duplication/Duel/Trade Script</div>
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()</textarea>
+      <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()</textarea>
       <button class="copy" onclick="copyInstant(this)">Copy</button>
     </div>
   </div>
@@ -251,7 +251,7 @@ textarea{
 
   <div class="scripts" id="scriptsblox">
     <div class="script-box">
-      <textarea readonly>loadstring(game:HttpGet("https://pastefy.app/Pp5gk8Tt/raw", true))()</textarea>
+      <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Voids-Blox-FruitsScript/refs/heads/main/MainLoader"))()</textarea>
       <button class="copy" onclick="copyInstant(this)">Copy</button>
     </div>
   </div>
