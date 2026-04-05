@@ -261,7 +261,7 @@ textarea{
   <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
   <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
   <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
-  <button class="task discord" onclick="step('brainrot',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
+  <button class="task discord" onclick="step('brainrot',this,'https://discord.gg/4Fcan5EX23')">💬 Join Discord</button>
 
   <div class="progress"><div class="bar" id="barbrainrot"></div></div>
   <div class="percent" id="perbrainrot">0%</div>
@@ -297,7 +297,7 @@ textarea{
   <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
   <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
   <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
-  <button class="task discord" onclick="step('blox',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
+  <button class="task discord" onclick="step('blox',this,'https://discord.gg/4Fcan5EX23')">💬 Join Discord</button>
 
   <div class="progress"><div class="bar" id="barblox"></div></div>
   <div class="percent" id="perblox">0%</div>
@@ -329,7 +329,7 @@ textarea{
   <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
   <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
   <button class="task youtube" onclick="step('other',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
-  <button class="task discord" onclick="step('other',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
+  <button class="task discord" onclick="step('other',this,'https://discord.gg/4Fcan5EX23')">💬 Join Discord</button>
 
   <div class="progress"><div class="bar" id="barother"></div></div>
   <div class="percent" id="perother">0%</div>
