@@ -57,15 +57,23 @@ body{
   font-weight:bold;
   cursor:pointer;
   color:#fff;
+  position:relative;
+  overflow:hidden;
+  transition:opacity 0.3s;
 }
 
-.tiktok{background:#3b82f6}
-.youtube{background:#f59e0b}
-.like{background:#22c55e}
-.comment{background:#ec4899}
-.watch{background:#ef4444}
-.discord{background:#5865f2}
-.switch{background:#64748b}
+.task:disabled{
+  cursor:not-allowed;
+  opacity:0.5;
+}
+
+.task.tiktok{background:#3b82f6}
+.task.youtube{background:#f59e0b}
+.task.like{background:#22c55e}
+.task.comment{background:#ec4899}
+.task.watch{background:#ef4444}
+.task.discord{background:#5865f2}
+.task.switch{background:#64748b}
 
 .progress{
   background:#1e293b;
@@ -195,21 +203,64 @@ textarea{
   color:#94a3b8;
   font-family:monospace;
 }
+
+/* Cooldown overlay */
+.cooldown-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(11,18,32,0.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+}
+
+.cooldown-text{
+  font-size:72px;
+  font-weight:bold;
+  color:#4fd1ff;
+  margin-bottom:20px;
+  text-shadow:0 0 20px #4fd1ff;
+}
+
+.cooldown-msg{
+  font-size:18px;
+  color:#94a3b8;
+  margin-bottom:10px;
+}
+
+.cooldown-sub{
+  font-size:14px;
+  color:#64748b;
+}
 </style>
 </head>
 
 <body>
 
+<!-- Cooldown Overlay -->
+<div id="cooldownOverlay" class="cooldown-overlay">
+  <div class="cooldown-text" id="cooldownTimer">15</div>
+  <div class="cooldown-msg">Please wait before continuing...</div>
+  <div class="cooldown-sub">Make sure you completed the step!</div>
+</div>
+
 <!-- STEAL A BRAINROT -->
 <div class="card" id="brainrot">
   <div class="title">🧠 Steal A Brainrot <span class="dev" onclick="dev('brainrot')">🔑</span></div>
-  <div class="subtitle">Complete all steps to unlock</div>
+  <div class="subtitle">Complete all steps (15s wait after each)</div>
 
   <button class="task watch" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">▶ Watch</button>
   <button class="task like" onclick="step('brainrot',this,'https://youtube.com/shorts/p8Tr6844hVg')">👍 Like</button>
   <button class="task youtube" onclick="step('brainrot',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
   <button class="task comment" onclick="step('brainrot',this,'https://youtu.be/Oc9vLLmABqs')">💬 Comment</button>
-  <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz')">📌 TikTok</button>
+  <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('brainrot',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
   <button class="task discord" onclick="step('brainrot',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
 
   <div class="progress"><div class="bar" id="barbrainrot"></div></div>
@@ -237,13 +288,15 @@ textarea{
 <!-- BLOX FRUITS -->
 <div class="card" id="blox" style="display:none">
   <div class="title">🍎 Blox Fruits <span class="dev" onclick="dev('blox')">🍎</span></div>
-  <div class="subtitle">Complete all steps to unlock</div>
+  <div class="subtitle">Complete all steps (15s wait after each)</div>
 
   <button class="task watch" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">▶ Watch</button>
   <button class="task like" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">👍 Like</button>
   <button class="task youtube" onclick="step('blox',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
   <button class="task comment" onclick="step('blox',this,'https://youtube.com/shorts/ycfxxkTQmTU')">💬 Comment</button>
-  <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 TikTok</button>
+  <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('blox',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
   <button class="task discord" onclick="step('blox',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
 
   <div class="progress"><div class="bar" id="barblox"></div></div>
@@ -270,9 +323,11 @@ textarea{
 <!-- OTHER -->
 <div class="card" id="other" style="display:none">
   <div class="title">⭐ Other Scripts <span class="dev" onclick="dev('other')">🔪</span></div>
-  <div class="subtitle">Follow & Join Discord to unlock</div>
+  <div class="subtitle">Follow & Join Discord (15s wait after each)</div>
 
-  <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@void_scriptz')">📌 TikTok</button>
+  <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@void_scriptz')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@mrmakenosense2?_r=1&_t=ZT-95IIrqUhJUs')">📌 Follow TikTok</button>
+  <button class="task tiktok" onclick="step('other',this,'https://www.tiktok.com/@beanhedded?_r=1&_t=ZT-95IIuG70f41')">📌 Follow TikTok</button>
   <button class="task youtube" onclick="step('other',this,'https://youtube.com/@xxxvoid_scriptzxxx')">🔔 Subscribe</button>
   <button class="task discord" onclick="step('other',this,'https://discord.gg/YKXuNRZc9')">💬 Join Discord</button>
 
@@ -303,8 +358,9 @@ textarea{
 </div>
 
 <script>
-const total={brainrot:6,blox:6,other:3}
+const total={brainrot:8,blox:8,other:5}
 const done={brainrot:0,blox:0,other:0}
+let cooldownActive = false;
 
 // Set update timestamps on load
 function setUpdateTimes(){
@@ -329,12 +385,45 @@ function setUpdateTimes(){
 setUpdateTimes();
 
 function step(p,b,l){
-  if(b.dataset.d)return
-  b.dataset.d=1
-  b.style.opacity=.6
-  done[p]++
-  update(p)
-  window.open(l,"_blank")
+  // Check if already done
+  if(b.dataset.d) return;
+  
+  // Check if cooldown active
+  if(cooldownActive) return;
+  
+  // Mark as done
+  b.dataset.d=1;
+  b.style.opacity=.6;
+  b.disabled = true;
+  done[p]++;
+  update(p);
+  
+  // Open link
+  window.open(l,"_blank");
+  
+  // Start 15 second cooldown
+  startCooldown();
+}
+
+function startCooldown(){
+  cooldownActive = true;
+  const overlay = document.getElementById('cooldownOverlay');
+  const timer = document.getElementById('cooldownTimer');
+  overlay.style.display = 'flex';
+  
+  let seconds = 15;
+  timer.textContent = seconds;
+  
+  const interval = setInterval(() => {
+    seconds--;
+    timer.textContent = seconds;
+    
+    if(seconds <= 0){
+      clearInterval(interval);
+      overlay.style.display = 'none';
+      cooldownActive = false;
+    }
+  }, 1000);
 }
 
 function update(p){
